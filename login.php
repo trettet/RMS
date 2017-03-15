@@ -1,9 +1,34 @@
 <?php
 	if (isset($_POST['username']) && isset($_POST['password'])) {
 		session_start();
+		$status = '';
 		require('sql_connect.php');
-		if (
+		
+		$username = $_POST['username'];
+		$password = hash('sha256', $_POST['password']);
+		
+		$query = "SELECT password, salt FROM users WHERE username='{$username}'";
+		$result = mysqli_query($conn, $query);
+		if ($result) {
+			if (mysqli_num_rows($result) > 0) {
+				$row = mysqli_fetch_assoc($result);
+				$hashedPass = hash('sha256', $password . $row['salt']);
+				echo $hashedPass;
+				if (strcasecmp($hashedPass, $row['password']) == 0) {
+					$status = 'success';
+					header('location: home.php');
+				} else {
+					$status = 'wrongpass';
+				}
+			} else {
+				$status = 'notfound';
+			}
+		} else {
+			$status = 'error';
+			// echo mysqli_error($conn);
+		}
 	}
+	echo "<script>console.log('{$status}');</script>";
 ?>
 <html>
 <head>

@@ -1,5 +1,5 @@
 <?php
-	$conn = mysqli_connect("localhost", "root", "", "RMSDBs");
+	$conn = mysqli_connect("localhost", "root", "", "RMSDB");
 	
 	if (!$conn) {
 		echo "Error: Unable to connect to MySQL. <br>";
