@@ -1,6 +1,8 @@
 <?php
 	if (isset($_POST['username']) && isset($_POST['password'])) {
 		session_start();
+		require('sql_connect.php');
+		if (
 	}
 ?>
 <html>
@@ -18,10 +20,16 @@
 					<div class="panel-body">
 						<form method='POST' action='login.php'>
 							<div class='form-group'>
-								<input type='text' name='username' class='form-control' placeholder='Username'>
+								<div class="input-group">
+									<div class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></div>
+									<input type='text' name='username' class='form-control' placeholder='Username'>
+								</div>
 							</div>
 							<div class='form-group'>
-								<input type='text' name='password' class='form-control' placeholder='Password'>
+								<div class="input-group">
+									<div class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
+									<input type='text' name='password' class='form-control' placeholder='Password'>
+								</div>
 							</div>
 							<button type='submit' class='pull-right btn btn-success'>Login <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
 						</form>
