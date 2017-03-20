@@ -13,7 +13,6 @@
 			if (mysqli_num_rows($result) > 0) {
 				$row = mysqli_fetch_assoc($result);
 				$hashedPass = hash('sha256', $password . $row['salt']);
-				echo $hashedPass;
 				if (strcasecmp($hashedPass, $row['password']) == 0) {
 					$status = 'success';
 					header('location: home.php');
@@ -43,6 +42,13 @@
 					<div class="panel-heading">Login</div>
 					<div class="panel-body">
 						<form method='POST' action='login.php'>
+                            <?php
+                                if(isset($status)) {
+                                    echo "<div class='form-group'>";
+                                    echo "Tis is temporary (we should use div class alert)" . $status;
+                                    echo "</div>";
+                                }
+                            ?>
 							<div class='form-group'>
 								<div class="input-group">
 									<div class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></div>
@@ -52,7 +58,7 @@
 							<div class='form-group'>
 								<div class="input-group">
 									<div class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
-									<input type='text' name='password' class='form-control' placeholder='Password'>
+									<input type='password' name='password' class='form-control' placeholder='Password'>
 								</div>
 							</div>
 							<button type='submit' class='pull-right btn btn-success'>Login <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
