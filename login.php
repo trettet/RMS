@@ -28,12 +28,11 @@
             // echo mysqli_error($conn);
         }
     } else {
-        $query = "SELECT password, salt FROM users WHERE username='admin'";
+        $query = "SELECT password FROM users WHERE username='admin'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_assoc($result);
-                $hashedPass = hash('sha256', $password . $row['salt']);
                 if (strcasecmp($defaultPass, $row['password']) == 0) {
                     header('location: setup.php');
                 }
