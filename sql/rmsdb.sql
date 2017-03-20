@@ -6,6 +6,8 @@
 -- Generation Time: Mar 15, 2017 at 09:55 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
+CREATE DATABASE RMSDB;
+USE RMSDB;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
