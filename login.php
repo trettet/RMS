@@ -28,7 +28,6 @@
 			// echo mysqli_error($conn);
 		}
 	}
-	echo "<script>console.log('{$status}');</script>";
 ?>
 <html>
 <head>
