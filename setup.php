@@ -64,19 +64,19 @@
 								<div class='form-group input'>
 									<div class='input-group'>
 										<div class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></div>
-										<input type='text' class='form-control' name='username' placeholder='Username'>
+										<input type='text' class='form-control' name='username' placeholder='Username' require>
 									</div>
 								</div>
 								<div class='form-group input'>
 									<div class='input-group'>
 										<div class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
-										<input type='password' class='form-control' name='password' placeholder='Password'>
+										<input type='password' class='form-control' name='password' placeholder='Password' require>
 									</div>
 								</div>
 								<div class='form-group input'>
 									<div class='input-group'>
 										<div class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
-										<input type='password' class='form-control' name='password2' placeholder='Confirm Password'>
+										<input type='password' class='form-control' name='password2' placeholder='Confirm Password' require>
 									</div>
 								</div>
 							</div>
@@ -87,31 +87,31 @@
 								<div class='form-group input'>
 									<div class='input-group'>
 										<div class="input-group-addon"><i class="fa fa-id-badge" aria-hidden="true"></i></div>
-										<input type='text' class='form-control' name='lname' placeholder='Last Name'>
+										<input type='text' class='form-control' name='lname' placeholder='Last Name' require>
 									</div>
 								</div>
 								<div class='form-group input'>
 									<div class='input-group'>
 										<div class="input-group-addon"><i class="fa fa-id-badge" aria-hidden="true"></i></div>
-										<input type='text' class='form-control' name='fname' placeholder='First Name'>
+										<input type='text' class='form-control' name='fname' placeholder='First Name' require>
 									</div>
 								</div>
 								<div class='form-group input'>
 									<div class='input-group'>
 										<div class="input-group-addon"><i class="fa fa-id-badge" aria-hidden="true"></i></div>
-										<input type='text' class='form-control' name='mname' placeholder='Middle Name'>
+										<input type='text' class='form-control' name='mname' placeholder='Middle Name' require>
 									</div>
 								</div>
 								<div class='form-group input'>
 									<div class='input-group'>
 										<div class="input-group-addon"><i class="fa fa-address-book" aria-hidden="true"></i></div>
-										<input type='text' class='form-control' name='address' placeholder='Address'>
+										<input type='text' class='form-control' name='address' placeholder='Address' require>
 									</div>
 								</div>
 								<div class='form-group input'>
 									<div class='input-group'>
 										<div class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></div>
-										<input type='text' class='form-control' name='contact' placeholder='Contact Number'>
+										<input type='text' class='form-control' name='contact_no' placeholder='Contact Number' require>
 									</div>
 								</div>
 								<button type='submit' class='pull-right btn btn-success'>Submit <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>	

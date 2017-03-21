@@ -5,9 +5,10 @@
 	if(strcasecmp($_POST["password"], $_POST["password2"]) == 0){
 		$password = $_POST["password"];
 	}else{
-		echo "<script>alert('Please change your password');
-					  window.location.href='setup.php';</script>";
+		echo "<script>alert('Password does not match!');
+					  window.location.href='admin.php';</script>";
 	}
+	
 	$username = $_POST["username"];
 	$lname = $_POST["lname"];
 	$fname = $_POST["fname"];
@@ -15,14 +16,14 @@
 	$address = $_POST["address"];
 	$contact = $_POST["contact_no"];
 	
-	$query= "UPDATE users SET username='{$username}', password='{$password}', lname='{$lname}', fname='{$fname}', mname='{$mname}', address='{$address}', contact_no='{$contact}' WHERE username='admin'";
-	$update = mysqli_query($conn, $query);
+	$query = "INSERT INTO users (username, password, lname, fname, mname, address, contact_no) VALUES ('{$username}', '{$password}', '{$lname}', '{$fname}', '{$mname}', '{$address}', '{$contact}')";
+	$insert = mysqli_query($conn, $query);
 	
-	if($update){
-		echo "<script>alert('Update Complete!');
+	if($insert){
+		echo "<script>alert('Desk Person Successfully Added!');
 					  window.location.href='admin.php';</script>";
 	}else{
 		echo "<script>alert('Something went wrong, please try again.');
-					  window.location.href='setup.php';</script>";
+					  window.location.href='admin.php';</script>";
 	}
 ?>
