@@ -4,19 +4,20 @@
     $defaultPass = '81047da812978a25c421a0b592033a644949817f2e6fba24fbdb5c2bb4a5f60e';
     
     if (isset($_POST['username']) && isset($_POST['password'])) {
-        $status = '';
         $username = $_POST['username'];
         $password = hash('sha256', $_POST['password']);
         
-        $query = "SELECT password, salt FROM users WHERE username='{$username}'";
-        $result = mysqli_query($conn, $query);
+        $q = "SELECT idx, password, salt FROM users WHERE username='{$username}'";
+        $result = mysqli_query($conn, $q);
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_assoc($result);
                 $hashedPass = hash('sha256', $password . $row['salt']);
                 if (strcasecmp($hashedPass, $row['password']) == 0) {
                     $status = 'success';
-                    header('location: home.php');
+                    $_SESSION['user_id'] = $row['idx'];
+                    $_SESSION['username'] = $username;
+                    header('location: admin.php');
                 } else {
                     $status = 'wrongpass';
                 }
@@ -28,8 +29,8 @@
             // echo mysqli_error($conn);
         }
     } else {
-        $query = "SELECT password FROM users WHERE username='admin'";
-        $result = mysqli_query($conn, $query);
+        $q = "SELECT * FROM users WHERE idx=1";
+        $result = mysqli_query($conn, $q);
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_assoc($result);
@@ -37,10 +38,10 @@
                     header('location: setup.php');
                 }
             } else {
-                $status = 'Warning! No Admin user found!';
+                $status = 'Error 900: No administrator account found.';
             }
         } else {
-            $status = 'error';
+            $status = 'Error 910: Invalid DB Query';
             // echo mysqli_error($conn);
         }
     }
