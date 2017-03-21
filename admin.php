@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 	session_start();
 	require("sql_connect.php");
@@ -9,10 +8,41 @@
 		<link rel='stylesheet' href='css/bootstrap.min.css'>
 		<link rel='stylesheet' href='css/font-awesome.min.css'>
 		<link rel='stylesheet' href='css/animate.css'>
+        <style>
+            .col-lg-12{
+				padding: 0px;
+			}
+            #titlebar{
+				height: 90px;
+				width: 100%;
+				background-color: #313541;
+			}
+			#cname{
+				color: #fafafa;
+				margin: 0px;
+				padding-top: 20px;
+				padding-left: 100px;
+			}
+			#title{
+				color: white;
+				margin: 0px;
+				padding-top: 20px;
+				padding-left: 100px;
+			}
+        </style>
 	</head>
 	<body>
 		<div class='container-fluid'>
 			<!--STUFF INSIDE THE PAGE-->
+            <div class='row'>
+                <div class='col-lg-12'>
+                    <div id='titlebar'>
+						<h5 id='cname'>S U N V I E W &nbsp R E S I D E N C E S &nbsp A N D &nbsp C O M E R C I A L &nbsp S P A C E S</h5>
+						<h3 id='title'>A D M I N ' S &nbsp P A G E</h3>
+					</div>
+                </div>
+            </div>
+            <!--MODAL TRIGGER BUTTONS-->
 			<div class='container-fluid'>
 				<button type='button' class='btn btn-success' data-toggle="modal" data-target="#add_building">
 					<i class="fa fa-plus-circle" aria-hidden="true"></i> ADD BUILDING 
@@ -356,5 +386,4 @@
 <script src='js/bootstrap.min.js'></script>
 <script>
 	new WOW().init();
->>>>>>> 807f8c954ebb5cdf93f17edcb8b820899f4b88f9
 </script>
