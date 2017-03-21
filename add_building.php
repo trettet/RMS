@@ -7,7 +7,7 @@
 	$contact_no = $_POST["contact_no"];
 	$desk_person = $_POST["desk_person"];
 	
-	$query = "INSERT INTO buildings (building_name, address, contact_no, desk_person_id) VALUES ('{$building_name}', '{$address}', '{$contact_no}', '{$desk_person}')";
+	$query = "INSERT INTO buildings (building_name, address, contact_no, desk_person_id) VALUES ('{$building_name}', '{$address}', '{$contact_no}', (SELECT desk_person_id FROM users WHERE username = '{$desk_person}'))";
 	
 	$insert = mysqli_query($conn, $query);
 	

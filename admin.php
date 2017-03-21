@@ -29,6 +29,9 @@
                 padding-top: 20px;
                 padding-left: 100px;
             }
+            #custotype{
+                padding: 20px;
+            }
         </style>
     </head>
     <body>
@@ -42,6 +45,44 @@
                     </div>
                 </div>
             </div>
+            <!--ADD CUSTOMER-->
+            <label id='custotype'>CUSTOMER (BUSINESS)</label>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                <th>Business Name</th>
+                <th>Address</th>
+                <th>Contact Number</th>
+                <th>Options</th>
+                </tr>
+                </thead>
+                <tbody>
+            <?php
+                $query2 = "SELECT c.customer_id, cb.business_name, c.address, c.contact_no FROM customers as c, customer_business as cb WHERE c.customer_id = cb.customer_id";
+                $fetch2 = mysqli_query($conn, $query2);
+                
+                $row = $fetch2->fetch_assoc();
+                echo "<tr>";
+                      foreach($row as $key => $value){
+                          if($key != "customer_id"){
+                            echo "<td>".$value."</td>";
+                          }
+                          
+                      }
+                      echo "<td>
+                                <input type='hidden' value='{$row["customer_id"]}'>
+                                <button type='button' class='btn '>
+                                    <i class='fa fa-pencil-square' aria-hidden='true'></i>
+                                </button>
+                                <button type='button' class='btn d_cus'>
+                                    <i class='fa fa-remove' aria-hidden='true'></i>
+                                </button>
+                           </td>";
+                      
+                echo "</tr>";
+            ?>
+            </tbody>
+            </table>
             <!--MODAL TRIGGER BUTTONS-->
             <div class='container-fluid'>
                 <button type='button' class='btn btn-success' data-toggle="modal" data-target="#add_building">
@@ -52,6 +93,9 @@
                 </button>
                 <button type='button' class='btn btn-success' data-toggle="modal" data-target="#add_dp">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i> ADD DESK PERSON 
+                </button>
+                <button type='button' class='btn btn-success' data-toggle="modal" data-target="#add_customer">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> ADD CUSTOMER  
                 </button>
             </div>
             
@@ -79,20 +123,21 @@
                                     <label>Desk Person</label>
                                     <select class="form-control" name="desk_person">
                                         <?php
-                                            $query = "SELECT desk_person_id FROM users";
+                                            $query = "SELECT username FROM users";
                                             $fetch = mysqli_query($conn, $query);
                                             
                                             if($fetch->num_rows > 0){
                                                 while($dp = $fetch->fetch_assoc()){
-                                                    echo "<options>{$dp["desk_person_id"]}</option>";
+                                                    echo "<option>{$dp["username"]}</option>";
                                                 }
                                             }
+                                            
                                         ?>
                                     </select>
                                 </div>
                                 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">
+                                    <button type="submit" class="btn btn-success">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Building
                                     </button>
                                 </div>
@@ -115,12 +160,12 @@
                                     <label>Building</label>
                                     <select class="form-control" name="building_id">
                                         <?php
-                                            $query = "SELECT building_id FROM buildings";
+                                            $query = "SELECT building_name FROM buildings";
                                             $fetch = mysqli_query($conn, $query);
                                             
                                             if($fetch->num_rows > 0){
                                                 while($bid = $fetch->fetch_assoc()){
-                                                    echo "<options>{$bid["building_id"]}</option>";
+                                                    echo "<option>{$bid["building_name"]}</option>";
                                                 }
                                             }
                                         ?>
@@ -146,7 +191,7 @@
                                 </div>
                                 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">
+                                    <button type="submit" class="btn btn-success">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Room
                                     </button>
                                 </div>
@@ -190,7 +235,36 @@
                                 <input name="contact_no" type="text" class="form-control" required>
                                 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Desk Person
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ADD CUSTOMER MODAL-->
+            <div id="add_customer" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">ADD CUSTOMER</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form method='POST' action='add_dp.php'>
+                                <div class="radio">
+                                    <label>Individual
+                                        <input type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+                                    </label>
+                                    <label>Business
+                                        <input type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+                                    </label>
+                                </div>
+                                
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Desk Person
                                     </button>
                                 </div>
@@ -207,4 +281,26 @@
 <script src='js/bootstrap.min.js'></script>
 <script>
     new WOW().init();
+    
+    $(document).ready(function(){
+        $(".d_cus").on("click", function(){
+            var conf = confirm("Are you sure you want to DELETE this CUSTOMER?");
+            if(conf){
+                var row = $(this).prev().prev().val();
+                $.ajax({
+                    url: "delete_customer.php",
+                    type: "POST",
+                    data: {customer_id : row},
+                    success: function(retval){
+                        if(retval == 1){
+                            alert("Customer deleted!");
+                            $(".d_cus").prev().prev().parent().parent().remove();
+                        }else{
+                            alert("Delete unsuccessful, please try again.");
+                        }
+                    }
+                });
+            }
+        });
+    });
 </script>

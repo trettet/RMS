@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <!-- console output
 <?php
     session_start();
@@ -31,7 +29,6 @@
     }
 ?>
 -->
->>>>>>> 6020607233708005eed1dda446379fc6aacd9680
 <!DOCTYPE html>
 <html>
     <head>
@@ -159,9 +156,6 @@
 </html>
 <script src='js/jquery-3.1.1.min.js'></script>
 <script src='js/wow.min.js'></script>
-<<<<<<< HEAD
 <script src='js/bootstrap.min.js'></script>
 
-=======
-<script src='js/bootstrap.min.js'></script>
->>>>>>> 6020607233708005eed1dda446379fc6aacd9680
+
